@@ -26,32 +26,33 @@
 
 package github.hua0512.plugins.douyin.download
 
+import com.github.michaelbull.result.Result
+import github.hua0512.plugins.StrevExtractor
+import github.hua0512.plugins.base.ExtractorError
+import github.hua0512.plugins.douyin.download.DouyinApis.Companion.LIVE_DOUYIN_URL
+import io.ktor.client.*
+import io.ktor.http.*
+import kotlinx.serialization.json.Json
+
 /**
- * Douyin live room url
+ * Douyin live stream extractor using strev api
  * @author hua0512
- * @date : 2024/10/6 16:41
+ * @date : 9/10/2025 12:05 PM
  */
+class DouyinStrevExtractor(http: HttpClient, json: Json, override val url: String) : StrevExtractor(http, json, url) {
 
+  internal var idStr = ""
 
-internal typealias DouyinApi = DouyinApis.Companion
+  init {
+    platformHeaders[HttpHeaders.Referrer] = LIVE_DOUYIN_URL
+  }
 
-
-class DouyinApis {
-
-  companion object {
-
-    internal const val BASE_URL = "https://www.douyin.com"
-    internal const val LIVE_DOUYIN_URL = "https://live.douyin.com"
-
-
-    internal const val WEBCAST_ENTER = "${LIVE_DOUYIN_URL}/webcast/room/web/enter/"
-    internal const val APP_ROOM_REFLOW = "https://webcast.amemv.com/webcast/room/reflow/info/"
-
-    internal val webSocketDomains = arrayOf(
-      "wss://webcast100-ws-web-lq.douyin.com",
-      "wss://webcast100-ws-web-hl.douyin.com",
-      "wss://webcast100-ws-web-lf.douyin.com",
-    )
-    internal val randomWebSocketUrl get() = "${webSocketDomains.random()}/webcast/im/push/v2/"
+  override suspend fun isLive(): Result<Boolean, ExtractorError> {
+    val result = super.isLive()
+    if (result.isOk) {
+      // extract id_str from extras
+      idStr = cachedMediaInfo?.extras?.get("id_str") ?: ""
+    }
+    return result
   }
 }

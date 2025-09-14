@@ -1,13 +1,13 @@
 [versions]
 ktor = "3.2.3"
 ktor-test = "2.3.13"
-ksp = "2.2.0-2.0.2"
-kotlin = "2.2.0"
+ksp = "2.2.10-2.0.2"
+kotlin = "2.2.10"
 kotlin-atomicfu = "0.29.0"
 kotlin-coroutines = "1.10.2"
 logback = "1.5.18"
-dagger = "2.57"
-protobuf = "4.31.1"
+dagger = "2.57.1"
+protobuf = "4.32.0"
 androidx-room = "2.7.2"
 androidx-sqlite = "2.5.2"
 
@@ -52,7 +52,7 @@ io-ktor-server-websockets-jvm = { module = "io.ktor:ktor-server-websockets-jvm",
 io-ktor-server-netty-jvm = { module = "io.ktor:ktor-server-netty-jvm", version.ref = "ktor" }
 io-ktor-server-tests-jvm = { module = "io.ktor:ktor-server-tests-jvm", version.ref = "ktor-test" }
 
-io-kotest-kotest-runner-junit5 = "io.kotest:kotest-runner-junit5:6.0.0.M8"
+io-kotest-kotest-runner-junit5 = "io.kotest:kotest-runner-junit5:6.0.3"
 
 io-lindstrom-m3u8-parser = "io.lindstrom:m3u8-parser:0.30"
 
@@ -83,7 +83,7 @@ org-openjdk-nashorn-nashorn-core = "org.openjdk.nashorn:nashorn-core:15.6"
 
 org-junit-jupiter-junit-jupiter = "org.junit.jupiter:junit-jupiter:5.13.4"
 
-org-mockito-mockito-core = "org.mockito:mockito-core:5.18.0"
+org-mockito-mockito-core = "org.mockito:mockito-core:5.19.0"
 
 [plugins]
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

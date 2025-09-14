@@ -44,12 +44,12 @@ import github.hua0512.utils.info
  *
  * @property app The [App] instance.
  * @property danmu The [DouyinDanmu] instance.
- * @property extractor The [DouyinCombinedApiExtractor] instance.
+ * @property extractor The [DouyinStrevExtractor] instance.
  */
 class Douyin(
   app: App,
   override val danmu: DouyinDanmu,
-  override val extractor: DouyinCombinedApiExtractor,
+  override val extractor: DouyinStrevExtractor,
 ) :
   PlatformDownloader<DouyinDownloadConfig>(app, danmu, extractor) {
 
@@ -69,7 +69,7 @@ class Douyin(
     val config = downloadConfig
     val selectedQuality = (config.quality?.value ?: app.config.douyinConfig.quality.value).ifEmpty { DouyinQuality.origin.value }
 
-    val selectedQualityStreams = streams.filter { it.extras["sdkKey"] == selectedQuality }.ifEmpty { streams }
+    val selectedQualityStreams = streams.filter { it.extras["sdk_key"] == selectedQuality }.ifEmpty { streams }
 
     val userSelectedSourceFormat = (config.sourceFormat ?: app.config.douyinConfig.sourceFormat) ?: VideoFormat.flv
 
